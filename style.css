@@ -1,0 +1,67 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+html,body {
+    margin: 0;
+    padding: 0;
+  }
+
+h1, h4 {
+    color: white;
+    text-align: center;
+}
+  
+body {
+    padding-top: 1em;
+    text-align: center;
+    background-color: black;
+    background-size: cover;
+    background-repeat: space;
+  }
+
+canvas {
+    /* background-image: url('./graphics/clouds.jpeg'); */
+    width: 100%;
+    height: 100;
+  }
+
+#container {
+    max-width: 50em;
+    /* height: 70vh; */
+    background-color: black;
+    margin: 0 auto;
+    padding: 1em;
+    display: grid;
+    grid-gap: 0.3em; /* spaces between the grid areas */
+    grid-template-rows: .25fr .5fr .25fr;
+    grid-template-columns: .25fr .5fr .25fr;
+    grid-template-areas: "top-left top-left top-right"
+                          "game game game"
+                          "btm btm btm";
+    }
+
+#top-left, #top-right, #bottom {
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(176, 224, 220, 0.473);
+    }
+      
+#top-left {
+    grid-area: top-left;
+    }
+      
+#top-right {
+    grid-area: top-right;
+    }
+      
+main {
+    grid-area: game;
+    }
+      
+#bottom {
+    grid-area: btm;
+    background-color: rgb(187, 179, 179);
+    }
+    
