@@ -5,6 +5,8 @@ let startButton = document.querySelector('button');
 let gameDiv = document.getElementById('container');
 let title = document.querySelector('h1');
 let subTitle = document.querySelector('h4');
+const towerImg = document.getElementById('towerImg');
+const ascenderImg = document.getElementById('ascenderImg');
 let ascender;
 let tower;
 let radiation;
@@ -84,6 +86,7 @@ function startGame() {
     title.classList.toggle("hidden");
     subTitle.classList.toggle("hidden");
     ascender = new Ascender(360, 375, 'yellow', 25, 25);
+    // ascender = ctx.drawImage(ascenderImg, 360, 375, 25, 25);
     tower = new Tower(385, 0, 'white', 50, 500);
     radiation = new Radiation(330, 100, 'green', 50, 50);
 
@@ -143,18 +146,19 @@ function gameLoop () {
     // clears the canvas
     ctx.clearRect(0, 0, game.width, game.height);
     scroller();
+    ctx.drawImage(towerImg, 220, 0, 380, 500);
     if (ascender.alive) {
         ascender.render();
         let hit = detectHit(radiation, ascender);
-
-        if (radiation.alive) {
-            radiation.render();
-        }
+        
         if (hit === true) {
             radiation.alive = false;
         }
+        if (radiation.alive) {
+            radiation.render();
+        }
     } 
-    tower.render();
+    // tower.render();
     // radiation.render();
 }
 
@@ -183,7 +187,12 @@ function detectHit (p1, p2) {
 
     if (hitTest) {
         console.log('HIT');
-        // radiation = {};
+        radiation = {};
+        radiation = new Radiation(Math.random() * 100, 
+                                Math.random() * 100, 
+                                'green', 
+                                Math.random() * 100, 
+                                Math.random() * 100);
         // return addRadiationPoisoning();
     } else {
         return false;
