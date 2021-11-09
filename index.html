@@ -11,14 +11,20 @@
 <body>
     <h1>G5 Tower Ascender</h1>
     <h4>avoid the deadly radiation!</h4>
-    <div id="container">
-        <aside id="top-left"><h2>high score</h2></aside>
-        <aside id="top-right"><h2 id="movement">score</h2></aside>
-        <main>
-            <canvas id="game">GAME TIME</canvas>
-        </main>
-        <aside id="bottom"><h2>controls</h2></aside>
-    </div>
+        <div id="startscreen" class="nothidden">
+            <h2>F</h2>
+            <button class="startbutton" type="button" onclick="startGame()">Start Game</button>
+    <!-- LOAD SCREEN DIV HERE, make a hidden class for the 2 divs to toggle when the start button is clicked -->
+        </div>
+        <div class="hidden" id="container">
+            <aside id="top-left"><h2>poison status</h2></aside>
+            <aside id="top-right"><h2 id="movement">score</h2></aside>
+            <main>
+                <canvas id="game">GAME TIME</canvas>
+            </main>
+            <aside id="bottom"><h2>controls</h2></aside>
+        </div>
+    <!-- <script src="./startscreen.js"></script> -->
     <script src="./main.js"></script>
 </body>
 </html>

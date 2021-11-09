@@ -1,5 +1,10 @@
 let game = document.querySelector('#game');
 let ctx = game.getContext('2d');
+let startScreen = document.getElementById('startscreen');
+let startButton = document.querySelector('button');
+let gameDiv = document.getElementById('container');
+let title = document.querySelector('h1');
+let subTitle = document.querySelector('h4');
 let ascender;
 let tower;
 let radiation;
@@ -8,8 +13,10 @@ ctx.lineWidth = 5;
 let bkgdImg = new Image();
 bkgdImg.src = "./graphics/clouds.jpeg"
 
-game.setAttribute('height', getComputedStyle(game)["height"]);
-game.setAttribute('width', getComputedStyle(game)["width"]);
+// game.setAttribute('height', getComputedStyle(game)["height"]);
+// game.setAttribute('width', getComputedStyle(game)["width"]);
+// console.log(game.height);
+// console.log(game.width);
 // game.width = 600;
 // game.height = 600;
 
@@ -59,6 +66,7 @@ class Radiation {
         this.color = color;
         this.width = width;
         this.height = height;
+        this.alive = false;
 
         this.render = function() {
             ctx.fillStyle = this.color;
@@ -67,15 +75,35 @@ class Radiation {
     }
 }
 
-// ======================= event listeners ========================== //
-
-window.addEventListener("DOMContentLoaded", function(e) {
+// ====================== launch game ====================== //
+function startGame() {
+    startScreen.classList.toggle("hidden");
+    gameDiv.classList.toggle("container");
+    game.setAttribute('height', getComputedStyle(game)["height"]);
+    game.setAttribute('width', getComputedStyle(game)["width"]);
+    title.classList.toggle("hidden");
+    subTitle.classList.toggle("hidden");
     ascender = new Ascender(360, 375, 'yellow', 25, 25);
     tower = new Tower(385, 0, 'white', 50, 500);
     radiation = new Radiation(330, 100, 'green', 50, 50);
 
     const runGame = setInterval(gameLoop, 120);
-});
+    const radLoop = setInterval(radiationLoop, 5120);
+}
+
+// ADD EVENT LISTENER FOR ONCLICK TO RUN startGame() //
+
+// game.setAttribute('height', getComputedStyle(game)["height"]);
+// game.setAttribute('width', getComputedStyle(game)["width"]);
+// ======================= event listeners ========================== //
+
+// window.addEventListener("DOMContentLoaded", function(e) {
+//     ascender = new Ascender(360, 375, 'yellow', 25, 25);
+//     tower = new Tower(385, 0, 'white', 50, 500);
+//     radiation = new Radiation(330, 100, 'green', 50, 50);
+
+//     const runGame = setInterval(gameLoop, 60);
+// });
 
 document.addEventListener('keydown', movementHandler);
 
@@ -99,32 +127,49 @@ function movementHandler(e) {
 }
 
 // ==================== make it scroller ===================== //
-
-window.onload = function scroller() {
-    let bkgdImgHeight = 0;
-    let scrollSpeed = 1;
-    function imgLoop() {
+let bkgdImgHeight = 0;
+let scrollSpeed = 10;
+function scroller() {
         ctx.drawImage(bkgdImg, 0, bkgdImgHeight);
         ctx.drawImage(bkgdImg, 0, bkgdImgHeight - game.height);
         bkgdImgHeight += scrollSpeed;
-        if (bkgdImgHeight === game.height)
+        if (bkgdImgHeight >= game.height) {
         bkgdImgHeight = 0;
-        window.requestAnimationFrame(imgLoop);
-    }
-    imgLoop();
+        }    // window.requestAnimationFrame(imgLoop);
 }
 // ===================== game loop ============================ //
 
 function gameLoop () {
     // clears the canvas
     ctx.clearRect(0, 0, game.width, game.height);
+    scroller();
     if (ascender.alive) {
         ascender.render();
         let hit = detectHit(radiation, ascender);
-    }
+
+        if (radiation.alive) {
+            radiation.render();
+        }
+        if (hit === true) {
+            radiation.alive = false;
+        }
+    } 
     tower.render();
-    radiation.render();
+    // radiation.render();
 }
+
+function radiationLoop() {
+    console.log(radiation);
+    radiation.alive = true;
+    // radiation.render();
+
+    // if (detectHit() === true) {
+    //     radiation = {};
+    // } else {
+    //     radiation.render();
+    // }
+}
+
 
 // ==================== hit detection ======================== //
 function detectHit (p1, p2) {
@@ -138,13 +183,18 @@ function detectHit (p1, p2) {
 
     if (hitTest) {
         console.log('HIT');
+        // radiation = {};
         // return addRadiationPoisoning();
     } else {
         return false;
     }
 }
 
+// draw images in for tower / ascender
+
 // ======================= add radiation poisoning =================== //
 // function addRadiationPoisoning() {
-
+//     if (hit) {
+            //HERE WE NEED TO TOGGLE THE HIDDEN DIV TO GO BACK TO START SCREEN
+//     }
 // }

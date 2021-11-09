@@ -26,13 +26,25 @@ canvas {
     height: 100;
   }
 
-#container {
+.hidden {
+    display: none;
+}
+
+button {
+    text-align: center;
+    margin: 0 auto;
+    width: 20vw;
+    height: 20vh;
+}
+
+.container {
     max-width: 50em;
-    /* height: 70vh; */
+    height: 70vh;
     background-color: black;
     margin: 0 auto;
     padding: 1em;
     display: grid;
+    /* position: absolute; */
     grid-gap: 0.3em; /* spaces between the grid areas */
     grid-template-rows: .25fr .5fr .25fr;
     grid-template-columns: .25fr .5fr .25fr;
@@ -40,6 +52,17 @@ canvas {
                           "game game game"
                           "btm btm btm";
     }
+
+.nothidden {
+    width: 75vw;
+    height: 75vh;
+    background-image: url('./graphics/clouds.jpeg');
+    margin: 0 auto;
+    /* display: grid; */
+    left: 12vw;
+    justify-content: center;
+    position: absolute;
+}
 
 #top-left, #top-right, #bottom {
     display: flex;
@@ -64,4 +87,3 @@ main {
     grid-area: btm;
     background-color: rgb(187, 179, 179);
     }
-    
