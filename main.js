@@ -64,7 +64,7 @@ class Radiation {
         this.color = color;
         this.width = width;
         this.height = height;
-        this.alive = false;
+        this.alive = true;
 
         this.render = function() {
             // ctx.fillStyle = this.color;
@@ -77,6 +77,7 @@ class Radiation {
 
 // ====================== launch game ====================== //
 function startGame() {
+    score = 0;
     startScreen.classList.toggle("hidden");
     gameDiv.classList.toggle("container");
     game.setAttribute('height', getComputedStyle(game)["height"]);
@@ -90,7 +91,7 @@ function startGame() {
     radiation.y = 0;
 
     runGame = setInterval(gameLoop, 120);
-    radLoop = setInterval(radiationLoop, 3000);
+    // radLoop = setInterval(radiationLoop, 3000);
 }
 
 
@@ -154,10 +155,10 @@ function gameLoop () {
     endGame();
 }
 
-function radiationLoop() {
-    console.log(radiation);
-    radiation.alive = true;
-}
+// function radiationLoop() {
+//     console.log(radiation);
+//     radiation.alive = true;
+// }
 
 // ==================== hit detection ======================== //
 function detectHit (p1, p2) {
@@ -184,8 +185,8 @@ function detectHit (p1, p2) {
         radiation = new Radiation(Math.random() * (450 - 300) + 300, 
                     0, 
                     'green', 
-                    Math.random() * (100 - 35) + 35, 
-                    Math.random() * (100 - 35) + 35);
+                    Math.random() * (100 - 45) + 45, 
+                    Math.random() * (100 - 45) + 45);
     } else {
         return false;
     }
@@ -198,21 +199,20 @@ function drawScore() {
 
 function endGame() {
     if (score >= '5') {
-        console.log('game over');
-
+        // console.log('game over');
         clearInterval(runGame);
         clearInterval(radLoop);
-        gameDiv.classList.toggle("hidden");
-        startScreen.classList.toggle("nothidden");
-        console.log(gameDiv);
-        console.log(startScreen);
+        startScreen.classList.toggle("hidden");
+        gameDiv.classList.toggle("container");
+        title.classList.toggle("hidden");
+        subTitle.classList.toggle("hidden");
     }
 }
 
 
 // todo - replace images with good images
 // flip ascender image when it's on the right side of the tower
-// stop game & make a game over screen for when you get hit with 5 poison clouds
+// make a game over screen
 // add music / update background image
 // add sound when you are hit by radiation
 
