@@ -1,5 +1,6 @@
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Amatic SC', cursive;
+    font-size: x-large;
 }
 
 html,body {
@@ -10,8 +11,16 @@ html,body {
 h1, h4 {
     color: white;
     text-align: center;
+    margin: 5;
 }
-  
+
+h2 {
+    color: white;
+}
+
+h3, h5 {
+    margin: 1;
+}
 body {
     padding-top: 1em;
     text-align: center;
@@ -34,10 +43,11 @@ button {
     text-align: center;
     margin: 0 auto;
     width: 20vw;
-    height: 20vh;
+    height: 10vh;
 }
 
 .container {
+    font-size: initial;
     max-width: 50em;
     height: 70vh;
     background-color: black;
@@ -55,7 +65,7 @@ button {
 
 .nothidden {
     width: 75vw;
-    height: 75vh;
+    height: 65vh;
     background-image: url('./graphics/clouds.jpeg');
     margin: 0 auto;
     /* display: grid; */

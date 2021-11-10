@@ -5,16 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap" rel="stylesheet">
     <title>G5 Tower Ascender</title>
 </head>
 <body>
     <h1>G5 Tower Ascender</h1>
     <h4>avoid the deadly radiation!</h4>
         <div id="startscreen" class="nothidden">
-            <h2>F</h2>
+            <h2>.</h2><br><br>
             <button class="startbutton" type="button" onclick="startGame()">Start Game</button>
-    <!-- LOAD SCREEN DIV HERE, make a hidden class for the 2 divs to toggle when the start button is clicked -->
+            <br><br>
+            <h3>Controls</h3>
+            <h5>Move to left of tower : a <br>Move to right of tower : d</h5>
         </div>
         <div class="hidden" id="container">
             <aside id="top-left"><h2>poison status</h2></aside>
@@ -22,7 +26,7 @@
             <main>
                 <canvas id="game">
                     <img src="./graphics/tower.png" id="towerImg">
-                    <img src="./graphics/climber3.png" id="ascenderImg">
+                    <img src="./graphics/climber2.jpeg" id="ascenderImg">
                 </canvas>
             </main>
             <aside id="bottom"><h2>controls</h2></aside>

@@ -5,6 +5,7 @@ let startButton = document.querySelector('button');
 let gameDiv = document.getElementById('container');
 let title = document.querySelector('h1');
 let subTitle = document.querySelector('h4');
+let poisonDisplay = document.getElementById("top-left");
 const towerImg = document.getElementById('towerImg');
 const ascenderImg = document.getElementById('ascenderImg');
 let ascender;
@@ -15,13 +16,6 @@ ctx.lineWidth = 5;
 let bkgdImg = new Image();
 bkgdImg.src = "./graphics/clouds.jpeg"
 
-// game.setAttribute('height', getComputedStyle(game)["height"]);
-// game.setAttribute('width', getComputedStyle(game)["width"]);
-// console.log(game.height);
-// console.log(game.width);
-// game.width = 600;
-// game.height = 600;
-
 class Tower {
     constructor(x, y, color, width, height){
         this.x = x;
@@ -31,8 +25,9 @@ class Tower {
         this.height = height;
 
         this.render = function() {
-            ctx.fillStyle = this.color;
-            ctx.fillRect(this.x, this.y, this.width, this.height);
+            // ctx.fillStyle = this.color;
+            // ctx.fillRect(this.x, this.y, this.width, this.height);
+            ctx.drawImage(towerImg, 220, 0, 380, 500);
         }
     }
 }
@@ -43,9 +38,9 @@ class Tower {
 
 class Ascender {
     constructor(x, y, color, width, height){
+        this.color = color;
         this.x = x;
         this.y = y;
-        this.color = color;
         this.width = width;
         this.height = height;
         this.alive = true;
@@ -53,13 +48,10 @@ class Ascender {
         this.render = function() {
             ctx.fillStyle = this.color;
             ctx.fillRect(this.x, this.y, this.width, this.height);
+            // ctx.drawImage(ascenderImg, 360, 375, 25, 25);
         }
     }
 }
-
-// let ascenderTest = new Ascender(390, 390, 'yellow', 10, 10);
-// console.log(ascenderTest);
-// ascenderTest.render();
 
 class Radiation {
     constructor(x, y, color, width, height){
@@ -86,9 +78,9 @@ function startGame() {
     title.classList.toggle("hidden");
     subTitle.classList.toggle("hidden");
     ascender = new Ascender(360, 375, 'yellow', 25, 25);
-    // ascender = ctx.drawImage(ascenderImg, 360, 375, 25, 25);
-    tower = new Tower(385, 0, 'white', 50, 500);
-    radiation = new Radiation(330, 100, 'green', 50, 50);
+    tower = new Tower;
+    radiation = new Radiation(330, 0, 'green', 50, 50);
+    radiation.y = 0;
 
     const runGame = setInterval(gameLoop, 120);
     const radLoop = setInterval(radiationLoop, 5120);
@@ -143,23 +135,25 @@ function scroller() {
 // ===================== game loop ============================ //
 
 function gameLoop () {
-    // clears the canvas
+
     ctx.clearRect(0, 0, game.width, game.height);
+    // poisonDisplay.textContent = `Poison Level:${hit}`;
     scroller();
-    ctx.drawImage(towerImg, 220, 0, 380, 500);
+
     if (ascender.alive) {
         ascender.render();
         let hit = detectHit(radiation, ascender);
         
-        if (hit === true) {
-            radiation.alive = false;
+    if (hit === true) {
+        radiation.alive = false;
         }
-        if (radiation.alive) {
-            radiation.render();
+    if (radiation.alive) {
+        radiation.render();
         }
+        let gravity = 6;
+        radiation.y += gravity;
     } 
-    // tower.render();
-    // radiation.render();
+    tower.render();
 }
 
 function radiationLoop() {
@@ -188,22 +182,33 @@ function detectHit (p1, p2) {
     if (hitTest) {
         console.log('HIT');
         radiation = {};
-        radiation = new Radiation(Math.random() * 100, 
-                                Math.random() * 100, 
-                                'green', 
-                                Math.random() * 100, 
-                                Math.random() * 100);
+        radiation = new Radiation(Math.random() * (480 - 330) + 330, 
+                    0, 
+                    'green',
+                    Math.random() * 100, 
+                    Math.random() * 100);
+        console.count(hitTest);
         // return addRadiationPoisoning();
+    } if (radiation.y >= 400) {
+        radiation = {};
+        radiation = new Radiation(Math.random() * (480 - 330) + 330, 
+                    0, 
+                    'green', 
+                    Math.random() * 100, 
+                    Math.random() * 100);
     } else {
         return false;
     }
 }
 
+
+// todo - make the hitTest value print to the top-left div
 // draw images in for tower / ascender
+// make a game over screen for when you get hit with 5 poison clouds
+// add music / update background image
+// add sound when you are hit by radiation
+
 
 // ======================= add radiation poisoning =================== //
 // function addRadiationPoisoning() {
-//     if (hit) {
-            //HERE WE NEED TO TOGGLE THE HIDDEN DIV TO GO BACK TO START SCREEN
-//     }
-// }
+//          }
