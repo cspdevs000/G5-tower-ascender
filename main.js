@@ -12,6 +12,8 @@ const radiationImg = document.getElementById('radiationImg');
 let ascender;
 let tower;
 let radiation;
+let runGame;
+let radLoop;
 ctx.fillStyle = 'white';
 ctx.lineWidth = 5;
 let bkgdImg = new Image();
@@ -72,6 +74,7 @@ class Radiation {
     }
 }
 
+
 // ====================== launch game ====================== //
 function startGame() {
     startScreen.classList.toggle("hidden");
@@ -86,8 +89,8 @@ function startGame() {
     radiation = new Radiation(330, 0, 'color', 50, 50);
     radiation.y = 0;
 
-    const runGame = setInterval(gameLoop, 120);
-    const radLoop = setInterval(radiationLoop, 3000);
+    runGame = setInterval(gameLoop, 120);
+    radLoop = setInterval(radiationLoop, 3000);
 }
 
 
@@ -130,7 +133,6 @@ function scroller() {
 function gameLoop () {
 
     ctx.clearRect(0, 0, game.width, game.height);
-    // poisonDisplay.textContent = `Poison Level:${hit}`;
     scroller();
 
     if (ascender.alive) {
@@ -156,7 +158,6 @@ function radiationLoop() {
     console.log(radiation);
     radiation.alive = true;
 }
-
 
 // ==================== hit detection ======================== //
 function detectHit (p1, p2) {
@@ -194,14 +195,17 @@ function drawScore() {
     poisonDisplay.textContent = "Poison Level: " + score;
 }
 
+
 function endGame() {
     if (score >= '5') {
         console.log('game over');
-        clearInterval(startGame);
-        clearInterval(gameLoop);
-        clearInterval(radiationLoop);
+
+        clearInterval(runGame);
+        clearInterval(radLoop);
         gameDiv.classList.toggle("hidden");
         startScreen.classList.toggle("nothidden");
+        console.log(gameDiv);
+        console.log(startScreen);
     }
 }
 
@@ -212,3 +216,5 @@ function endGame() {
 // add music / update background image
 // add sound when you are hit by radiation
 
+// if extra time, make tower a more width-consistent photo and also have it scroll
+// if you accomplish that, 
