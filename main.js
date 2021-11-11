@@ -3,6 +3,7 @@ let ctx = game.getContext('2d');
 let startScreen = document.getElementById('startscreen');
 let startButton = document.querySelector('button');
 let gameDiv = document.getElementById('container');
+let restart = document.getElementById('gameover');
 let title = document.querySelector('h1');
 let subTitle = document.querySelector('h4');
 let poisonDisplay = document.getElementById("top-left");
@@ -202,11 +203,17 @@ function endGame() {
         // console.log('game over');
         clearInterval(runGame);
         clearInterval(radLoop);
-        startScreen.classList.toggle("hidden");
+        restart.classList.toggle("hidden");
         gameDiv.classList.toggle("container");
         title.classList.toggle("hidden");
         subTitle.classList.toggle("hidden");
     }
+}
+
+function restartGame() {
+    startScreen.classList.toggle("hidden");
+    restart.classList.toggle("hidden");
+    startGame();
 }
 
 
@@ -217,4 +224,4 @@ function endGame() {
 // add sound when you are hit by radiation
 
 // if extra time, make tower a more width-consistent photo and also have it scroll
-// if you accomplish that, 
+// if you accomplish that, make the top of the tower animation and the alien abduction
