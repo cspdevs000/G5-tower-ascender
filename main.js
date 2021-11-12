@@ -217,7 +217,7 @@ function detectHit (p1, p2) {
 
     let hitTest = (
         p1.y + p1.height > (p2.y + 70) && 
-        p1.y < (p2.y + 70) + p2.height &&
+        p1.y < (p2.y - 70) + p2.height &&
         p1.x + p1.width > (p2.x + 30) &&
         p1.x < (p2.x - 30) + p2.width
     ); // {boolean} : if all are true === hit
