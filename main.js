@@ -26,7 +26,9 @@ let avoids = 0;
 let bkgdAudio = new Audio();
 bkgdAudio.src = "./evilNine-technology.mp3";
 let splat = new Audio();
-splat.src = "./splat.mp3";
+splat.src = "./splat2.mp3";
+let laugh = new Audio();
+laugh.src = "./gameover.mp3";
 
 class Tower {
     constructor(x, y, color, width, height){
@@ -58,9 +60,15 @@ class Ascender {
         this.alive = true;
 
         this.render = function() {
-            // ctx.fillStyle = this.color;
-            // ctx.fillRect(                 360, 375, 25, 25);
-            ctx.drawImage(ascenderImg, this.x, this.y, this.width, this.height);
+            if (this.x <= 320) {
+                ctx.drawImage(ascenderImg, this.x, this.y, this.width, this.height);
+            } else {
+                ctx.translate(this.x + this.width, this.y);
+                ctx.scale(-1, 1);
+                ctx.drawImage(ascenderImg, 0, 0, this.width, this.height);   
+                ctx.setTransform(1,0,0,1,0,0);
+            }
+
         }
     }
 }
@@ -111,29 +119,27 @@ document.addEventListener('keydown', movementHandler);
 function movementHandler(e) {
     console.log('movement', e.key); //tests the movement
     switch(e.key) {
-        case 'w': //move user up, but stop at canvas limit if user gets to top 
-            ascender.y - 10 >= 0 ? ascender.y -= 20 : null;
-            break;
+        // case 'w': //move user up, but stop at canvas limit if user gets to top 
+        //     ascender.y - 10 >= 0 ? ascender.y -= 20 : null;
+        //     break;
         case 'a':  //move user left, but only to the other side of the tower
             ascender.x - 10 >= 330 ? ascender.x -= 90 : null;
-            flipAscender(ascenderImg, x, y);
             break;
         case 'd': //move user right, but only to the other side of the tower
             ascender.x + 10 <= (game.width - 400) ? ascender.x += 90 : null;
-            flipAscender(ascenderImg, x, y);
             break;
-        case 's': //move user down, but stop at the bottom border of the canvas
-            ascender.y + 10 <= (game.height - 20) ? ascender.y += 10 : null;
-            break;
+        // case 's': //move user down, but stop at the bottom border of the canvas
+        //     ascender.y + 10 <= (game.height - 20) ? ascender.y += 10 : null;
+        //     break;
     }
 }
 
-function flipAscender(ascenderImg, x, y) {
-    ctx.translate(x + ascenderImg.width, y);
-    ctx.scale(-1, 1);
-    ctx.drawImage(ascenderImg, 0, 0);    
-    // ctx.setTransform(1,0,0,1,0,0);
-}
+// function flipAscender(image, x, y) {
+//     ctx.translate(x + image.width, y);
+//     ctx.scale(-1, 1);
+//     ctx.drawImage(image, 0, 0);   
+//     ctx.setTransform(1,0,0,1,0,0);
+// }
 
 // ==================== make it scroller ===================== //
 let bkgdImgHeight = 0;
@@ -165,7 +171,7 @@ function gameLoop () {
     if (radiation.alive) {
         radiation.render();
         }
-        let gravity = 7;
+        let gravity = 6;
         radiation.y += gravity;
     } 
     if (avoids >= 5) {
@@ -176,20 +182,24 @@ function gameLoop () {
         let gravity = 8;
         radiation.y += gravity;
     }
-    if (avoids >= 20) {
+    if (avoids >= 25) {
         let gravity = 9;
         radiation.y += gravity;
     }
-    if (avoids >= 35) {
+    if (avoids >= 50) {
         let gravity = 10;
         radiation.y += gravity;
     }
-    if (avoids >= 50) {
+    if (avoids >= 75) {
         let gravity = 11;
         radiation.y += gravity;
     }
-    if (avoids >= 75) {
+    if (avoids >= 100) {
         let gravity = 12;
+        radiation.y += gravity;
+    }
+    if (avoids >= 135) {
+        let gravity = 13;
         radiation.y += gravity;
     }
     if (score >= 2) {
@@ -224,7 +234,7 @@ function detectHit (p1, p2) {
     let avoid = (radiation.y >= 240);
 
     if (hitTest) {
-        console.log('HIT');
+        // console.log('HIT');
         splat.play();
         radiation = {};
         radiation = new Radiation(Math.random() * (450 - 300) + 300, 
@@ -232,16 +242,16 @@ function detectHit (p1, p2) {
                     'green',
                     Math.random() * (55 - 45) + 45, 
                     Math.random() * (90 - 45) + 45);
-        console.count(hitTest);
+        // console.count(hitTest);
         return score++;
     } if (radiation.y >= 280) {
         radiation = {};
         radiation = new Radiation(Math.random() * (450 - 300) + 300, 
                     0, 
                     'green', 
-                    Math.random() * (55 - 45) + 45, 
-                    Math.random() * (90 - 45) + 45);
-        console.count(avoid);
+                    Math.random() * (70 - 25) + 25, 
+                    Math.random() * (110 - 45) + 45);
+        // console.count(avoid);
         avoids++;
     } else {
         return false;
@@ -259,6 +269,7 @@ function drawScore() {
 function endGame() {
     if (score >= '5') {
         // console.log('game over');
+        laugh.play();
         clearInterval(runGame);
         clearInterval(radLoop);
         restart.classList.toggle("hidden");
