@@ -174,7 +174,7 @@ function gameLoop () {
         let gravity = 6;
         radiation.y += gravity;
     } 
-    if (avoids >= 5) {
+    if (avoids >= 4) {
         let gravity = 7;
         radiation.y += gravity;
     }
@@ -228,8 +228,8 @@ function detectHit (p1, p2) {
     let hitTest = (
         p1.y + p1.height > (p2.y + 70) && 
         p1.y < (p2.y - 70) + p2.height &&
-        p1.x + p1.width > (p2.x + 30) &&
-        p1.x < (p2.x - 30) + p2.width
+        p1.x + p1.width > (p2.x + 25) &&
+        p1.x < (p2.x - 25) + p2.width
     ); // {boolean} : if all are true === hit
     let avoid = (radiation.y >= 240);
 
@@ -240,17 +240,17 @@ function detectHit (p1, p2) {
         radiation = new Radiation(Math.random() * (450 - 300) + 300, 
                     0, 
                     'green',
-                    Math.random() * (55 - 45) + 45, 
-                    Math.random() * (90 - 45) + 45);
+                    Math.random() * (60 - 50) + 45, 
+                    Math.random() * (80 - 45) + 45);
         // console.count(hitTest);
         return score++;
     } if (radiation.y >= 280) {
         radiation = {};
-        radiation = new Radiation(Math.random() * (450 - 300) + 300, 
+        radiation = new Radiation(Math.random() * (475 - 275) + 275, 
                     0, 
                     'green', 
-                    Math.random() * (70 - 25) + 25, 
-                    Math.random() * (110 - 45) + 45);
+                    Math.random() * (70 - 40) + 40, 
+                    Math.random() * (100 - 45) + 45);
         // console.count(avoid);
         avoids++;
     } else {
@@ -277,7 +277,7 @@ function endGame() {
         title.classList.toggle("hidden");
         subTitle.classList.toggle("hidden");
         title.textContent = "You Died...";
-        subTitle.textContent = "Needs moar tin foil hat";
+        subTitle.textContent = "You manage to avoid " + avoids + " clouds of death";
     }
 }
 
@@ -290,7 +290,7 @@ function restartGame() {
     poisonDisplay.style.backgroundColor = "rgba(176, 224, 220, 0.473)";
     avoidsDisplay.style.backgroundColor = "rgba(176, 224, 220, 0.473)";
     footDisplay.style.backgroundColor = "rgb(187, 179, 179)";
-    footDisplay.textContent = "Remember, 5 clouds will kill you!\n";
+    footDisplay.textContent = "Remember, 5 clouds will kill you!";
     gameDiv.classList.toggle("container");
     game.setAttribute('height', getComputedStyle(game)["height"]);
     game.setAttribute('width', getComputedStyle(game)["width"]);
@@ -304,6 +304,7 @@ function restartGame() {
 
 
 // todo - replace images with good images
+// print the score in the restart page
 // flip ascender image when it's on the right side of the tower
 // add music / update background image
 // add sound when you are hit by radiation

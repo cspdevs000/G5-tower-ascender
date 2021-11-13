@@ -14,12 +14,13 @@
     <h1 class="title">G5 Tower Ascender</h1>
     <h4 class="subtitle">avoid the deadly radiation!</h4>
         <div id="startscreen" class="nothidden">
-            <h2>.</h2><br><br>
+            <h2><br><br><br><br><br></h2><br><br>
             <button class="startbutton" type="button" onclick="startGame()">Start Game</button>
             <br><br>
             <h3>Controls</h3>
             <h5>Move to left of tower : a <br>Move to right of tower : d</h5>
         </div>
+        <br><br><br>
         <div class="hidden" id="container">
             <aside id="top-left"><h2>poison status</h2></aside>
             <aside id="top-right"><h2 id="movement"></h2></aside>
@@ -27,13 +28,13 @@
                 <canvas id="game">
                     <img src="./graphics/tower.png" id="towerImg">
                     <img src="./graphics/climber5.png" id="ascenderImg">
-                    <img src="./graphics/radiation5.png" id="radiationImg">
+                    <img src="./graphics/radiation4.png" id="radiationImg">
                 </canvas>
             </main>
             <aside id="bottom"><h2>5 radiation clouds is enough to prove fatal for the average earthling</h2></aside>
         </div>
         <div class="hidden" id="gameover">
-            <button class="restart" onclick="restartGame()">Play Again</button>
+            <button class="restart" onclick="restartGame()">Try Again</button>
         </div>
     <!-- <script src="./startscreen.js"></script> -->
     <script src="./main.js"></script>

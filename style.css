@@ -54,7 +54,8 @@ button {
     margin: 0 auto;
     padding: 1em;
     display: grid;
-    /* position: absolute; */
+    /* position: absolute;
+    justify-content: center; */
     grid-gap: 0.3em; /* spaces between the grid areas */
     grid-template-rows: .25fr .5fr .25fr;
     grid-template-columns: .25fr .5fr .25fr;
