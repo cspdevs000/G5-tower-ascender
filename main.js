@@ -26,9 +26,9 @@ let avoids = 0;
 let bkgdAudio = new Audio();
 bkgdAudio.src = "./evilNine-technology.mp3";
 let splat = new Audio();
-splat.src = "./splat2.mp3";
+splat.src = "./splat3.wav";
 let laugh = new Audio();
-laugh.src = "./gameover.mp3";
+laugh.src = "./gameover2.wav";
 
 class Tower {
     constructor(x, y, color, width, height){
