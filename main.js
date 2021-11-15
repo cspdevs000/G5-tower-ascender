@@ -27,13 +27,8 @@ let bkgdAudio = new Audio();
 bkgdAudio.src = "./cease.mp3";
 let splat = new Audio();
 splat.src = "./splat3.wav";
-let splat2 = new Audio();
-splat2.src = "./splat2.mp3"
-let splat3 = new Audio();
-splat3.src = "./splat.mp3";
 let laugh = new Audio();
 laugh.src = "./gameover2.wav";
-let splats = [splat, splat2, splat3];
 let scratch = new Audio();
 scratch.src = "./scratch.mp3";
 
@@ -140,13 +135,6 @@ function movementHandler(e) {
         //     break;
     }
 }
-
-// function flipAscender(image, x, y) {
-//     ctx.translate(x + image.width, y);
-//     ctx.scale(-1, 1);
-//     ctx.drawImage(image, 0, 0);   
-//     ctx.setTransform(1,0,0,1,0,0);
-// }
 
 // ==================== make it scroller ===================== //
 let bkgdImgHeight = 0;
