@@ -24,16 +24,18 @@ bkgdImg.src = "./graphics/clouds5.jpeg"
 let score = 0;
 let avoids = 0;
 let bkgdAudio = new Audio();
-bkgdAudio.src = "./evilNine-technology.mp3";
+bkgdAudio.src = "./cease.mp3";
 let splat = new Audio();
 splat.src = "./splat3.wav";
 let splat2 = new Audio();
 splat2.src = "./splat2.mp3"
 let splat3 = new Audio();
-splat3.src = "./plat.mp3";
+splat3.src = "./splat.mp3";
 let laugh = new Audio();
 laugh.src = "./gameover2.wav";
 let splats = [splat, splat2, splat3];
+let scratch = new Audio();
+scratch.src = "./scratch.mp3";
 
 class Tower {
     constructor(x, y, color, width, height){
@@ -274,6 +276,9 @@ function endGame() {
     if (score >= '5') {
         // console.log('game over');
         laugh.play();
+        scratch.play();
+        bkgdAudio.pause();
+        bkgdAudio.currentTime = 0;
         clearInterval(runGame);
         clearInterval(radLoop);
         restart.classList.toggle("hidden");
@@ -304,6 +309,7 @@ function restartGame() {
     radiation.y = 0;
 
     runGame = setInterval(gameLoop, 120);
+    bkgdAudio.play();
 }
 
 
