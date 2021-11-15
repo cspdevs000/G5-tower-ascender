@@ -27,8 +27,13 @@ let bkgdAudio = new Audio();
 bkgdAudio.src = "./evilNine-technology.mp3";
 let splat = new Audio();
 splat.src = "./splat3.wav";
+let splat2 = new Audio();
+splat2.src = "./splat2.mp3"
+let splat3 = new Audio();
+splat3.src = "./plat.mp3";
 let laugh = new Audio();
 laugh.src = "./gameover2.wav";
+let splats = [splat, splat2, splat3];
 
 class Tower {
     constructor(x, y, color, width, height){
@@ -162,9 +167,7 @@ function gameLoop () {
     if (ascender.alive) {
         ascender.render();
         let hit = detectHit(radiation, ascender);
-    // if (ascender.x >= 400) {
 
-    //     }
     if (hit === true) {
         radiation.alive = false;
         }
@@ -212,7 +215,8 @@ function gameLoop () {
         poisonDisplay.style.backgroundColor = "red";
         avoidsDisplay.style.backgroundColor = "red";
         footDisplay.style.backgroundColor = "red";
-        footDisplay.textContent = "PLEASE BE CAREFUL!!\n";
+        footDisplay.textContent = "PLEASE BE CAREFUL!!";
+        footDisplay.style.fontWeight = "bold";
     }
 
     tower.render();
@@ -226,10 +230,10 @@ function gameLoop () {
 function detectHit (p1, p2) {
 
     let hitTest = (
-        p1.y + p1.height > (p2.y + 70) && 
-        p1.y < (p2.y - 70) + p2.height &&
-        p1.x + p1.width > (p2.x + 25) &&
-        p1.x < (p2.x - 25) + p2.width
+        p1.y + p1.height > (p2.y + 65) && 
+        p1.y < (p2.y - 65) + p2.height &&
+        p1.x + p1.width > (p2.x + 28) &&
+        p1.x < (p2.x - 28) + p2.width
     ); // {boolean} : if all are true === hit
     let avoid = (radiation.y >= 240);
 
@@ -237,7 +241,7 @@ function detectHit (p1, p2) {
         // console.log('HIT');
         splat.play();
         radiation = {};
-        radiation = new Radiation(Math.random() * (450 - 300) + 300, 
+        radiation = new Radiation(Math.random() * (475 - 275) + 275, 
                     0, 
                     'green',
                     Math.random() * (60 - 50) + 45, 
@@ -246,7 +250,7 @@ function detectHit (p1, p2) {
         return score++;
     } if (radiation.y >= 280) {
         radiation = {};
-        radiation = new Radiation(Math.random() * (475 - 275) + 275, 
+        radiation = new Radiation(Math.random() * (450 - 300) + 300, 
                     0, 
                     'green', 
                     Math.random() * (70 - 40) + 40, 
@@ -303,11 +307,6 @@ function restartGame() {
 }
 
 
-// todo - replace images with good images
-// print the score in the restart page
-// flip ascender image when it's on the right side of the tower
-// add music / update background image
-// add sound when you are hit by radiation
-
 // if extra time, make tower a more width-consistent photo and also have it scroll
 // if you accomplish that, make the top of the tower animation and the alien abduction
+// possibly make healing element in the future

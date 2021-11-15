@@ -1,5 +1,5 @@
 * {
-    font-family: 'Amatic SC', cursive;
+    font-family: 'Gruppo', cursive;
     font-size: x-large;
 }
 
@@ -15,11 +15,13 @@ h1, h4 {
 }
 
 h2 {
-    color: white;
+    color: black;
+    font-weight: bold;
 }
 
 h3, h5 {
     margin: 1;
+    color: whitesmoke;
 }
 body {
     padding-top: 1em;
@@ -44,6 +46,7 @@ button {
     margin: 0 auto;
     width: 20vw;
     height: 10vh;
+    background-color: whitesmoke;
 }
 
 .container {
@@ -67,7 +70,8 @@ button {
 .nothidden {
     width: 75vw;
     height: 65vh;
-    background-image: url('./graphics/clouds.jpeg');
+    background-image: url('./graphics/background2.jpeg');
+    background-size: cover;
     margin: 0 auto;
     /* display: grid; */
     left: 12vw;
@@ -78,16 +82,19 @@ button {
 #top-left, #top-right, #bottom {
     display: flex;
         justify-content: center;
-        align-items: center;
-        background-color: rgba(176, 224, 220, 0.473);
+        /* align-items: center; */
+        padding: 20px;
     }
       
 #top-left {
     grid-area: top-left;
+    background-color: rgba(176, 224, 220, 0.473);
     }
       
 #top-right {
     grid-area: top-right;
+    background-color: rgba(176, 224, 220, 0.473);
+    font-size: large;
     }
       
 main {
@@ -96,5 +103,6 @@ main {
       
 #bottom {
     grid-area: btm;
-    background-color: rgb(187, 179, 179);
+    background-color: rgba(176, 224, 220, 0.473);
+    color: black;
     }
