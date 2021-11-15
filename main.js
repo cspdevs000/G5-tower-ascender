@@ -135,35 +135,35 @@ function gameLoop () {
     if (radiation.alive) {
         radiation.render();
         }
-        let gravity = 6;
+        let gravity = 4;
         radiation.y += gravity;
     } 
     if (avoids >= 4) {
-        let gravity = 7;
+        let gravity = 5;
         radiation.y += gravity;
     }
     if (avoids >= 10) {
-        let gravity = 8;
+        let gravity = 6;
         radiation.y += gravity;
     }
     if (avoids >= 25) {
-        let gravity = 9;
+        let gravity = 7;
         radiation.y += gravity;
     }
     if (avoids >= 50) {
-        let gravity = 10;
+        let gravity = 8;
         radiation.y += gravity;
     }
     if (avoids >= 75) {
-        let gravity = 11;
+        let gravity = 9;
         radiation.y += gravity;
     }
     if (avoids >= 100) {
-        let gravity = 12;
+        let gravity = 10;
         radiation.y += gravity;
     }
     if (avoids >= 135) {
-        let gravity = 13;
+        let gravity = 11;
         radiation.y += gravity;
     }
     if (score >= 2) {
